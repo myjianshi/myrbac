@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.gyc.myrbac.dao.UserDao">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="edu.gyc.myrbac.model.User">
+        <id column="id" property="id" />
+        <result column="username" property="username" />
+        <result column="password" property="password" />
+    </resultMap>
+    <select id="selectRolesByPrimaryKey" parameterType="java.lang.Integer" resultType="edu.gyc.myrbac.model.Role">
+        select role.*
+        from role, user_role
+        where user_role.role_id = role.id and user_role.user_id = #{id,jdbcType=INTEGER}
+    </select>
+</mapper>
